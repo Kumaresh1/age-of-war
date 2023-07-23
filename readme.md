@@ -19,6 +19,13 @@ With CMD input
 
 ![Alt text](image-1.png)
 
+
+## Areas of Improvements
+- Tests can be added
+- Modules can be made better
+
+
+
 ## Design Patterns
 
 

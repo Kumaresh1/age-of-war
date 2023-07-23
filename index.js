@@ -1,5 +1,5 @@
 // ****************************************** Import Starts ******************************************
-const { defaultSoldierTypes } = require ('./constants/constants');
+const { defaultSoldierTypes } = require ('./constants/soldierTypes');
 const AdvantageConfig = require('./class/advantageConfig');
 const DefaultBattleOutcomeStrategy = require('./class/defaultOutcomeStrategy');
 const findWinningArrangement = require('./algo/bruteForceAlgo');
