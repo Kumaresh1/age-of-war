@@ -8,7 +8,7 @@ This program simulates a medieval battle where a player has a set of platoons wi
 2. Ensure you have [Node.js](https://nodejs.org) installed on your machine.
 
 ## How to run
-node .\age_of_war_solution.js 
+node index.js 
 
 
 ## Screenshots
