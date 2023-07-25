@@ -36,25 +36,19 @@ The Decorator design pattern is used to dynamically add additional attributes or
 
 ### Separation of Concerns
 
-The code separates the battle simulation logic (index.js) from other modules such as constants/constants.js, config/advantageConfig.js, algo/bruteForceAlgo.js, and outputUtils/outputUtils.js. Each module has a specific responsibility, promoting maintainability and code readability.
+The code separates the battle simulation logic (index.js) from other modules such as constants/constants.js, algo/bruteForceAlgo.js, and outputUtils/outputUtils.js. Each module has a specific responsibility, promoting maintainability and code readability.
 
 ### Dependency Injection 
 The Soldier class uses dependency injection to receive the battle outcome strategy (DefaultBattleOutcomeStrategy) through its constructor. This allows for easier testing and flexibility when using different battle outcome strategies.
 
 ### Encapsulation
-Classes such as AdvantageConfig and DefaultBattleOutcomeStrategy encapsulate their internal logic and data, providing an interface for other modules to interact with them.
-
-### Composition over Inheritance
-Instead of relying on inheritance, the code appears to favor composition, as seen in the AdvantageConfig class, where it uses a Map to hold advantage information for different soldier types.
-
+Classes such as  DefaultBattleOutcomeStrategy encapsulate their internal logic and data, providing an interface for other modules to interact with them.
 
 ## SOLID Principles
 
 ### Single Responsibility Principle (SRP)
 
-Each class in the code has a single responsibility. For example, the `Soldier` class is responsible for representing a soldier type and holds the battle outcome strategy. The `AdvantageConfig` class is responsible for managing the advantage relationships between soldier types.
-
-Sure! Here's the analysis of SOLID principles in .md format:
+Each class in the code has a single responsibility. For example, the `Soldier` class is responsible for representing a soldier type and holds the battle outcome strategy. 
 
 ### SOLID Principles in the Code
 
@@ -62,9 +56,6 @@ Sure! Here's the analysis of SOLID principles in .md format:
 
 The `Soldier` class follows SRP as it is responsible for representing a soldier, maintaining its type and count, and handling battle outcome strategies.
 
-#### Open/Closed Principle (OCP)
-
-The code demonstrates a level of openness to extension by employing the `AdvantageConfig` class to manage advantages for different soldier types. New soldier types can be easily added without modifying existing code.
 
 #### Liskov Substitution Principle (LSP)
 

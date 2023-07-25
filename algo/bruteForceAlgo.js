@@ -1,10 +1,9 @@
-const {generatePermutations} = require ('../constants/permutationHelper');
+const {generatePermutations} = require ('../helperFunc/permutationHelper');
 
 
 const findWinningArrangement = (
     ownSoldiers,
     opponentSoldiers,
-    advantageConfig
   ) => {
     const permutations = generatePermutations(ownSoldiers);
   
@@ -15,13 +14,8 @@ const findWinningArrangement = (
   
       for (let i = 0; i < 5; i++) {
         const opponentCount = opponentSoldiers[i].getCount();
-        const hasAdvantage = hasAdvantageFunc(
-          arrangement[i].constructor.name,
-          opponentSoldiers[i].constructor.name,
-          advantageConfig
-        );
   
-        const outcome = arrangement[i].getOutcome(opponentCount, hasAdvantage);
+        const outcome = arrangement[i].getOutcome(opponentSoldiers[i].constructor.name,opponentCount);
         if (outcome === 1) {
           wins++;
         } else if (outcome === 0) {
@@ -47,9 +41,8 @@ const findWinningArrangement = (
     return { winningArrangement: null, battleStats };
   };
 
-const hasAdvantageFunc = (ownClass, opponentClass, advantageConfig) => {
-    const advantages = advantageConfig.getAdvantagesFor(ownClass);
+const hasAdvantageFunc = ( opponentClass, advantages) => {
     return advantages.includes(opponentClass);
 };
 
-module.exports=findWinningArrangement
+module.exports={findWinningArrangement,hasAdvantageFunc}

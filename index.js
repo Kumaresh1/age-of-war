@@ -1,11 +1,10 @@
-// ****************************************** Import Starts ******************************************
-const { defaultSoldierTypes } = require ('./constants/soldierTypes');
-const AdvantageConfig = require('./class/advantageConfig');
+// ****************************************** Import Starts ****************************************** \\
+const { defaultSoldierTypes,soldierAdvantages } = require ('./constants/constants');
 const DefaultBattleOutcomeStrategy = require('./class/defaultOutcomeStrategy');
-const findWinningArrangement = require('./algo/bruteForceAlgo');
+const {findWinningArrangement,hasAdvantageFunc} = require('./algo/bruteForceAlgo');
 const { printBattleStats } = require('./outputUtils/outputUtils')
 const readline = require("readline");
-// ****************************************** Import Ends ******************************************
+// ****************************************** Import Ends ****************************************** \\
 
 class Soldier {
   constructor(type, count) {
@@ -17,8 +16,16 @@ class Soldier {
   getCount() {
     return this.count;
   }
+  getAdvantage() {
+    if(soldierAdvantages[this.type]){
+      return soldierAdvantages[this.type]
+    }
+    else return [] ;
+  }
 
-  getOutcome(opponentCount, hasAdvantage) {
+  getOutcome(opponentClass,opponentCount) {
+
+    const hasAdvantage=hasAdvantageFunc(opponentClass,this.getAdvantage())
     return this.battleOutcomeStrategy.getOutcome(
       this.count,
       opponentCount,
@@ -34,7 +41,11 @@ const parsePlatoons = (platoons) => {
 
   for (const platoon of platoonList) {
     const [type, count] = platoon.split("#");
-    soldiers.push(createSoldier(type, parseInt(count)));
+    try {
+      soldiers.push(createSoldier(type, parseInt(count)));
+    } catch (error) {
+      console.log(error)
+    }
   }
 
   return soldiers;
@@ -91,12 +102,10 @@ const getOwnAndOpponentPlatoons = () => {
 
   const ownSoldiers = parsePlatoons(ownPlatoons);
   const opponentSoldiers = parsePlatoons(opponentPlatoons);
-  const advantageConfig = new AdvantageConfig();
 
   const { winningArrangement, battleStats } = findWinningArrangement(
     ownSoldiers,
     opponentSoldiers,
-    advantageConfig
   );
 
   if (winningArrangement) {
